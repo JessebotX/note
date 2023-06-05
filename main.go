@@ -25,7 +25,7 @@ func main() {
 			tags = options[1:]
 		}
 
-		note := NewNote(title, tags)
+		note := InitNote(title, tags)
 		fmt.Println(note.Title, note.Tags, note.FileName)
 	} else {
 		fmt.Fprintf(os.Stderr, "Error: invalid command %v. See command `help` for more information\n", command)

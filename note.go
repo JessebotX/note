@@ -16,7 +16,7 @@ type Note struct {
 
 var ExcludedPunctuationRegexp string = "[][{}!@#$%^&*()=+'\"?,.|;:~`‘’“”/]*"
 
-func NewNote(title string, tags []string) *Note {
+func InitNote(title string, tags []string) *Note {
 	currentTime := time.Now()
 	identifier := currentTime.Format("20060102T150405")
 	dateString := currentTime.Format("2006-01-02T15:04:05-07:00")
@@ -33,9 +33,18 @@ func NewNote(title string, tags []string) *Note {
 
 func getNoteFileName(title string, tags []string, date time.Time) string {
 	dateIdentifier := date.Format("20060102T150405")
-	noteFileNameTitle := dateIdentifier + "--" + sanitizeForFileName(title) + getTagsForFileName(tags) + ".md"
 
-	return noteFileNameTitle
+	result := dateIdentifier
+
+	if len(title) > 0 {
+		result += "--" + sanitizeForFileName(title)
+	}
+
+	if len(tags) > 0 {
+		result += "__" + getTagsForFileName(tags)
+	}
+
+	return result + ".md"
 }
 
 func getTagsForFileName(tags []string) string {
@@ -43,7 +52,7 @@ func getTagsForFileName(tags []string) string {
 		return ""
 	}
 
-	result := "__"
+	result := ""
 	for i, tag := range tags {
 		result += sanitizeForFileName(tag)
 
