@@ -1,3 +1,3 @@
-module github.com/JessebotX/note
+module github.com/JessebotX/mknote
 
-go 1.24.1
+go 1.25.0
