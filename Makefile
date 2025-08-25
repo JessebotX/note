@@ -9,7 +9,7 @@ GOLINTTARGET = **/*.go
 all: build
 
 build:
-	$(GOEXE) build
+	$(GOEXE) build ./cmd/mknote
 
 fmt: format
 format:
