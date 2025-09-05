@@ -12,3 +12,6 @@ all: build
 build:
 	mkdir -p $(BUILDDIR)
 	$(CXX) $(CXXFLAGS) src/main.cpp -o $(BUILDDIR)$(BINEXE) 
+
+clean:
+	rm -rf $(BUILDDIR)
