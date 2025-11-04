@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -std=c99 -pedantic -Wall -Wextra -Wno-unused-function -Wno-unused-parameter
+CFLAGS = -std=c99 -pedantic -Wall -Wextra -Wno-unused-function -Wno-unused-parameter -Wno-unused-variable
 
 PROGRAM_NAME = note
 BUILD_DIR = build/
