@@ -1,7 +1,6 @@
 #include "program.h"
-#include <string.h>
 
-char**
+Program_StringOption*
 program_add_string_option(char* name, char* name_alt, char* value_default)
 {
 	uint8_t i = program__string_options_count;
@@ -13,7 +12,7 @@ program_add_string_option(char* name, char* name_alt, char* value_default)
 	};
 	program__string_options_count++;
 
-	return &program__string_options[i].value;
+	return &program__string_options[i];
 }
 
 int*
@@ -68,18 +67,16 @@ program_parse_options(int args_count, char* args[])
 		bool exists = false;
 
 		for (int j = 0; j < program__string_options_count; j++) {
-			if (strcmp(args[i], program__string_options[j].name) != 0 || strcmp(args[i], program__string_options[j].name_alt) != 0) {
-				continue;
-			}
+			if (!strcmp(args[i], program__string_options[j].name) || (program__string_options[j].name_alt != NULL && !strcmp(args[i], program__string_options[j].name_alt))) {
+				if ((i + 1) >= args_count) {
+					return 1;
+				}
 
-			if ((i + 1) >= args_count) {
-				return 1;
+				program__string_options[j].set = true;
+				program__string_options[j].value = args[i + 1];
+				i++;
+				exists = true;
 			}
-
-			program__string_options[j].set = true;
-			program__string_options[j].value = args[i + 1];
-			i++;
-			exists = true;
 		}
 
 		if (!exists) {

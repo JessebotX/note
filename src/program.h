@@ -1,9 +1,5 @@
 #pragma once
 
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdint.h>
-
 #include "common.h"
 
 typedef struct Program_StringOption {
@@ -52,5 +48,9 @@ PRIVATE Program_FloatOption program__float_options[PROGRAM__MAX_ARGS];
 PRIVATE uint8_t program__bool_options_count = 0;
 PRIVATE Program_BoolOption program__bool_options[PROGRAM__MAX_ARGS];
 
-void
-program_cli_parse(void);
+
+Program_StringOption*
+program_add_string_option(char* name, char* name_alt, char* value_default);
+
+int
+program_parse_options(int args_count, char* args[]);
