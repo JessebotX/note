@@ -48,9 +48,17 @@ PRIVATE Program_FloatOption program__float_options[PROGRAM__MAX_ARGS];
 PRIVATE uint8_t program__bool_options_count = 0;
 PRIVATE Program_BoolOption program__bool_options[PROGRAM__MAX_ARGS];
 
-
 Program_StringOption*
 program_add_string_option(char* name, char* name_alt, char* value_default);
+
+Program_IntOption*
+program_add_int_option(char* name, char* name_alt, int value_default);
+
+Program_FloatOption*
+program_add_float_option(char* name, char* name_alt, double value_default);
+
+Program_BoolOption*
+program_add_bool_option(char* name, char* name_alt, bool value_default);
 
 int
 program_parse_options(int args_count, char* args[]);
