@@ -6,7 +6,8 @@ BUILD_DIR = build/
 BUILD_BIN = $(BUILD_DIR)$(PROGRAM_NAME)
 SRCS = \
 	src/main.c \
-	src/program.c
+	src/program.c \
+	src/string.c
 
 .PHONY: all build clean
 
