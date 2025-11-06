@@ -48,14 +48,16 @@ program_add_float_option(char* name, char* name_alt, double value_default)
 }
 
 Program_BoolOption*
-program_add_bool_option(char* name, char* name_alt, bool value_default)
+program_add_bool_option(char* name_true, char* name_true_alt, char* name_false, char* name_false_alt, bool value_default)
 {
 	uint8_t i = program__bool_options_count;
 	program__bool_options[i] = (Program_BoolOption){
-		.name          = name,
-		.name_alt      = name_alt,
-		.value         = value_default,
-		.value_default = value_default,
+		.name_true      = name_true,
+		.name_true_alt  = name_true_alt,
+		.name_false     = name_false,
+		.name_false_alt = name_false_alt,
+		.value          = value_default,
+		.value_default  = value_default,
 	};
 	program__bool_options_count++;
 
@@ -66,8 +68,6 @@ int
 program_parse_options(int args_count, char* args[])
 {
 	for (int i = 0; i < args_count; i++) {
-		bool exists = false;
-
 		for (int j = 0; j < program__string_options_count; j++) {
 			Program_StringOption* string_opt = &program__string_options[j];
 			if (!strcmp(args[i], string_opt->name) || (string_opt->name_alt != NULL && !strcmp(args[i], string_opt->name_alt))) {
@@ -78,17 +78,21 @@ program_parse_options(int args_count, char* args[])
 				string_opt->set = true;
 				string_opt->value = args[i + 1];
 				i++;
-				exists = true;
 				break;
 			}
 		}
 
 		for (int j = 0; j < program__bool_options_count; j++) {
 			Program_BoolOption* bool_opt = &program__bool_options[j];
-			if (!strcmp(args[i], bool_opt->name) || (bool_opt->name_alt != NULL && !strcmp(args[i], bool_opt->name_alt))) {
+			if (!strcmp(args[i], bool_opt->name_true) || (bool_opt->name_true_alt != NULL && !strcmp(args[i], bool_opt->name_true_alt))) {
 				bool_opt->set = true;
 				bool_opt->value = true;
-				exists = true;
+				break;
+			}
+
+			if (!strcmp(args[i], bool_opt->name_false) || (bool_opt->name_false_alt != NULL && !strcmp(args[i], bool_opt->name_false_alt))) {
+				bool_opt->set = true;
+				bool_opt->value = false;
 				break;
 			}
 		}
@@ -101,15 +105,14 @@ program_parse_options(int args_count, char* args[])
 				}
 
 				char* endptr;
-				long int num = strtol(args[i + 1], &endptr, INT_BASE);
+				long long num = strtol(args[i + 1], &endptr, INT_BASE);
 				if (*endptr != '\0') {
 					return 1;
 				}
 
 				int_opt->set = true;
-				int_opt->value = (int)(num);
+				int_opt->value = num;
 				i++;
-				exists = true;
 				break;
 			}
 		}
@@ -130,13 +133,8 @@ program_parse_options(int args_count, char* args[])
 				float_opt->set = true;
 				float_opt->value = num;
 				i++;
-				exists = true;
 				break;
 			}
-		}
-
-		if (!exists) {
-			return 2;
 		}
 	}
 

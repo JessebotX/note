@@ -11,11 +11,11 @@ typedef struct Program_StringOption {
 } Program_StringOption;
 
 typedef struct Program_IntOption {
-	int   value;
-	int   value_default;
-	bool  set;
-	char* name;
-	char* name_alt;
+	long long value;
+	long long value_default;
+	bool      set;
+	char*     name;
+	char*     name_alt;
 } Program_IntOption;
 
 typedef struct Program_FloatOption {
@@ -30,8 +30,10 @@ typedef struct Program_BoolOption {
 	bool  value;
 	bool  value_default;
 	bool  set;
-	char* name;
-	char* name_alt;
+	char* name_true;
+	char* name_true_alt;
+	char* name_false;
+	char* name_false_alt;
 } Program_BoolOption;
 
 #define PROGRAM__MAX_ARGS 64
@@ -58,7 +60,7 @@ Program_FloatOption*
 program_add_float_option(char* name, char* name_alt, double value_default);
 
 Program_BoolOption*
-program_add_bool_option(char* name, char* name_alt, bool value_default);
+program_add_bool_option(char* name_true, char* name_true_alt, char* name_false, char* name_false_alt, bool value_default);
 
 int
 program_parse_options(int args_count, char* args[]);

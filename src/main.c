@@ -11,7 +11,7 @@ main(int argc, char* argv[])
 	Program_StringOption* s1 = program_add_string_option("-s", "-s1", NULL);
 	Program_StringOption* s2 = program_add_string_option("-s2", NULL, NULL);
 	Program_IntOption* i1 = program_add_int_option("-i", "-i1", 0);
-	Program_BoolOption* b1 = program_add_bool_option("-b", "-b1", false);
+	Program_BoolOption* b1 = program_add_bool_option("-b", "-b1", "-no-b", "-no-b1", true);
 	Program_FloatOption* f1 = program_add_float_option("-f", "-f1", 1.05);
 
 	int err;
@@ -28,7 +28,7 @@ main(int argc, char* argv[])
 		printf("-s2 = %s\n", s2->value);
 	}
 
-	printf("-i1 = %d\n", i1->value);
+	printf("-i1 = %lld\n", i1->value);
 	printf("-b1 = %d\n", b1->value);
 	printf("-f1 = %lf\n", f1->value);
 
