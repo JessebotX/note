@@ -21,7 +21,7 @@ main(int argc, char* argv[])
 	string_append_string(&hello, world);
 	string_append_cstr(&hello, " It's me!");
 
-	printf("%s (%zu/%zu)\n", hello.text, hello.count_bytes, hello.capacity);
+	printf("%s (%zu/%zu)\n", hello.text, hello.count_bytes, hello.capacity_bytes);
 
 	int err;
 	if ((err = program_parse_options(argc - 1, argv + 1))) {

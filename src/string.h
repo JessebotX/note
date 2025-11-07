@@ -5,7 +5,7 @@
 
 typedef struct String {
 	size_t count_bytes;
-	size_t capacity;
+	size_t capacity_bytes;
 	char* text;
 } String;
 
@@ -31,3 +31,6 @@ string_append_cstr(String* a, const char* b);
 
 String_Result
 string_append_cstr_with_count_bytes(String* a, size_t b_count_bytes, const char* b);
+
+Error
+string_reserve(String* s, size_t n);
