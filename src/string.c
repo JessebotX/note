@@ -42,14 +42,26 @@ string_free(String* s)
 }
 
 String_Result
-string_append(String* a, String b)
+string_append_string(String* a, String b)
+{
+	return string_append_cstr_with_count_bytes(a, b.count_bytes, b.text); 
+}
+
+String_Result
+string_append_cstr(String* a, const char* b)
+{
+	return string_append_cstr_with_count_bytes(a, (size_t)(strlen(b)), b);
+}
+
+String_Result
+string_append_cstr_with_count_bytes(String* a, size_t b_count_bytes, const char* b)
 {
 	assert(a != NULL);
 
-	size_t new_count_bytes = a->count_bytes + b.count_bytes;
+	size_t new_count_bytes = a->count_bytes + b_count_bytes;
 
 	if (new_count_bytes >= a->capacity) {
-		size_t new_capacity = sizeof(a->text) * ((new_count_bytes + 1) * 2);
+		size_t new_capacity = sizeof(a->text) * ((new_count_bytes + 1) * 1.25);
 		char* old_text = a->text;
 
 		a->text = realloc(a->text, new_capacity);
@@ -61,12 +73,11 @@ string_append(String* a, String b)
 		a->capacity = new_capacity;
 	}
 
-	for (size_t i = 0; i < b.count_bytes; i++) {
-		a->text[a->count_bytes + i] = b.text[i];
+	for (size_t i = 0; i < b_count_bytes; i++) {
+		a->text[a->count_bytes + i] = b[i];
 	}
 	a->count_bytes = new_count_bytes;
 	a->text[a->count_bytes] = '\0';
 
 	return (String_Result){ .result = *a };
 }
-

@@ -18,9 +18,10 @@ main(int argc, char* argv[])
 	String hello = string_new("Hello").result;
 	String world = string_new(", world!!!!!!!!!!").result;
 
-	string_append(&hello, world);
+	string_append_string(&hello, world);
+	string_append_cstr(&hello, " It's me!");
 
-	printf("%s (%zu chars)\n", hello.text, hello.count_bytes);
+	printf("%s (%zu/%zu)\n", hello.text, hello.count_bytes, hello.capacity);
 
 	int err;
 	if ((err = program_parse_options(argc - 1, argv + 1))) {

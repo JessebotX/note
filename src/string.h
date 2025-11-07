@@ -15,13 +15,19 @@ typedef struct StringResult {
 } String_Result;
 
 String_Result
-string_new(const char* c_str);
+string_new(const char* cstr);
 
 String_Result
-string_new_with_count_bytes(size_t c_str_count_bytes, const char* c_str);
+string_new_with_count_bytes(size_t cstr_count_bytes, const char* cstr);
 
 void
 string_free(String* s);
 
 String_Result
-string_append(String* a, String b);
+string_append_string(String* a, String b);
+
+String_Result
+string_append_cstr(String* a, const char* b);
+
+String_Result
+string_append_cstr_with_count_bytes(String* a, size_t b_count_bytes, const char* b);
