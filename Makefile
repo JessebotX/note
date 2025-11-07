@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -std=c99 -pedantic -Wall -Wextra -Wno-unused-function -Wno-unused-parameter -Wno-unused-variable
+CFLAGS = -std=c99 -pedantic -Wall -Wextra -Wno-unused-function -Wno-unused-parameter
 
 PROGRAM_NAME = note
 BUILD_DIR = build/
@@ -18,4 +18,4 @@ build:
 	$(CC) $(CFLAGS) $(SRCS) -o $(BUILD_BIN)
 
 clean:
-	rm -rf $(BUILD_DIR)*
+	rm -rf $(BUILD_BIN)
