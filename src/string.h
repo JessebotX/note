@@ -22,3 +22,6 @@ string_new_with_count_bytes(size_t c_str_count_bytes, const char* c_str);
 
 void
 string_free(String* s);
+
+String_Result
+string_append(String* a, String b);

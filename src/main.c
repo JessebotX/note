@@ -1,4 +1,5 @@
 #include "program.h"
+#include "string.h"
 
 int
 main(int argc, char* argv[])
@@ -13,6 +14,13 @@ main(int argc, char* argv[])
 	Program_IntOption* i1 = program_add_int_option("-i", "-i1", 0);
 	Program_BoolOption* b1 = program_add_bool_option("-b", "-b1", "-no-b", "-no-b1", true);
 	Program_FloatOption* f1 = program_add_float_option("-f", "-f1", 1.05);
+
+	String hello = string_new("Hello").result;
+	String world = string_new(", world!!!!!!!!!!").result;
+
+	string_append(&hello, world);
+
+	printf("%s (%zu chars)\n", hello.text, hello.count_bytes);
 
 	int err;
 	if ((err = program_parse_options(argc - 1, argv + 1))) {
