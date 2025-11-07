@@ -1,4 +1,5 @@
-#pragma once
+#ifndef NOTE_STRING_H
+#define NOTE_STRING_H
 
 #include "base.h"
 #include "error.h"
@@ -34,3 +35,5 @@ string_append_cstr_with_count_bytes(String* a, size_t b_count_bytes, const char*
 
 Error
 string_reserve(String* s, size_t n);
+
+#endif // NOTE_STRING_H

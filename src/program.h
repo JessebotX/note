@@ -1,4 +1,5 @@
-#pragma once
+#ifndef NOTE_PROGRAM_H
+#define NOTE_PROGRAM_H
 
 #include "base.h"
 
@@ -64,3 +65,5 @@ program_add_bool_option(char* name_true, char* name_true_alt, char* name_false, 
 
 int
 program_parse_options(int args_count, char* args[]);
+
+#endif // NOTE_PROGRAM_H
