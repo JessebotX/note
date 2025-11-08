@@ -9,7 +9,7 @@ string_new(const char* cstr)
 }
 
 String_Result
-string_new_with_count_bytes(size_t cstr_count_bytes, const char* cstr)
+string_new_with_count_bytes(uint64_t cstr_count_bytes, const char* cstr)
 {
 	assert(cstr != NULL);
 
@@ -22,7 +22,7 @@ string_new_with_count_bytes(size_t cstr_count_bytes, const char* cstr)
 		return (String_Result){ .error = ALLOC_FAIL };
 	}
 
-	for (size_t i = 0; i < s.count_bytes; i++) {
+	for (uint64_t i = 0; i < s.count_bytes; i++) {
 		s.text[i] = cstr[i];
 	}
 	s.text[s.count_bytes] = '\0';
@@ -50,19 +50,19 @@ string_append_string(String* a, String b)
 String_Result
 string_append_cstr(String* a, const char* b)
 {
-	return string_append_cstr_with_count_bytes(a, (size_t)(strlen(b)), b);
+	return string_append_cstr_with_count_bytes(a, (uint64_t)(strlen(b)), b);
 }
 
 String_Result
-string_append_cstr_with_count_bytes(String* a, size_t b_count_bytes, const char* b)
+string_append_cstr_with_count_bytes(String* a, uint64_t b_count_bytes, const char* b)
 {
 	assert(a != NULL);
 	assert(b != NULL);
 
-	size_t new_count_bytes = a->count_bytes + b_count_bytes;
+	uint64_t new_count_bytes = a->count_bytes + b_count_bytes;
 
 	if (new_count_bytes >= a->capacity_bytes) {
-		size_t new_capacity_bytes = a->capacity_bytes + ((b_count_bytes + 1) * 2);
+		uint64_t new_capacity_bytes = a->capacity_bytes + ((b_count_bytes + 1) * 2);
 		char* old_text = a->text;
 
 		a->text = realloc(a->text, new_capacity_bytes);
@@ -74,7 +74,7 @@ string_append_cstr_with_count_bytes(String* a, size_t b_count_bytes, const char*
 		a->capacity_bytes = new_capacity_bytes;
 	}
 
-	for (size_t i = 0; i < b_count_bytes; i++) {
+	for (uint64_t i = 0; i < b_count_bytes; i++) {
 		a->text[a->count_bytes + i] = b[i];
 	}
 	a->count_bytes = new_count_bytes;
@@ -84,7 +84,7 @@ string_append_cstr_with_count_bytes(String* a, size_t b_count_bytes, const char*
 }
 
 Error
-string_reserve(String* s, size_t n)
+string_reserve(String* s, uint64_t n)
 {
 	assert(s != NULL);
 

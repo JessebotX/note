@@ -12,8 +12,8 @@ typedef struct Program_StringOption {
 } Program_StringOption;
 
 typedef struct Program_IntOption {
-	long long value;
-	long long value_default;
+	uint64_t  value;
+	uint64_t  value_default;
 	bool      set;
 	char*     name;
 	char*     name_alt;
@@ -43,7 +43,7 @@ Program_StringOption*
 program_add_string_option(char* name, char* name_alt, char* value_default);
 
 Program_IntOption*
-program_add_int_option(char* name, char* name_alt, int value_default);
+program_add_int_option(char* name, char* name_alt, int64_t value_default);
 
 Program_FloatOption*
 program_add_float_option(char* name, char* name_alt, double value_default);

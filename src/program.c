@@ -30,7 +30,7 @@ program_add_string_option(char* name, char* name_alt, char* value_default)
 }
 
 Program_IntOption*
-program_add_int_option(char* name, char* name_alt, int value_default)
+program_add_int_option(char* name, char* name_alt, int64_t value_default)
 {
 	uint8_t i = program__int_options_count;
 	program__int_options[i] = (Program_IntOption){
@@ -123,7 +123,7 @@ program_parse_options(int args_count, char* args[])
 				}
 
 				int_opt->set = true;
-				int_opt->value = num;
+				int_opt->value = (int64_t)(num);
 				i++;
 				break;
 			}

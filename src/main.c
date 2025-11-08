@@ -37,7 +37,7 @@ main(int argc, char* argv[])
 		printf("-s2 = %s\n", s2->value);
 	}
 
-	printf("-i1 = %lld\n", i1->value);
+	printf("-i1 = %ld\n", i1->value);
 	printf("-b1 = %d\n", b1->value);
 	printf("-f1 = %lf\n", f1->value);
 
