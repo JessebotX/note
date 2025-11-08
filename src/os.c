@@ -32,3 +32,14 @@ os_dir_new(String path, int permissions)
 
 	return OK;
 }
+
+String_Result
+os_envvar_get(String name)
+{
+	char* value = getenv(name->text);
+	if (value == NULL) {
+		return (String_Result){ .error = ENVVAR_NOT_FOUND };
+	}
+	return string_new(value);
+}
+
