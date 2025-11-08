@@ -1,5 +1,5 @@
-#ifndef NOTE_BASE_H
-#define NOTE_BASE_H
+#ifndef BASE_H
+#define BASE_H
 
 #include <assert.h>
 #include <stdbool.h>
@@ -11,4 +11,4 @@
 #define PRIVATE static
 #define LOCAL_PERSIST static
 
-#endif // NOTE_BASE_H
+#endif // BASE_H
