@@ -1,6 +1,7 @@
 #include "program.h"
 
 #define INT_BASE 10
+#define PROGRAM__MAX_ARGS 64
 
 static uint8_t program__string_options_count = 0;
 static Program_StringOption program__string_options[PROGRAM__MAX_ARGS];
@@ -13,6 +14,9 @@ static Program_FloatOption program__float_options[PROGRAM__MAX_ARGS];
 
 static uint8_t program__bool_options_count = 0;
 static Program_BoolOption program__bool_options[PROGRAM__MAX_ARGS];
+
+static uint8_t program__pos_args_count = 0;
+static char* program__pos_args[PROGRAM__MAX_ARGS];
 
 Program_StringOption*
 program_add_string_option(char* name, char* name_alt, char* value_default)

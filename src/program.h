@@ -37,8 +37,6 @@ typedef struct Program_BoolOption {
 	char* name_false_alt;
 } Program_BoolOption;
 
-#define PROGRAM__MAX_ARGS 64
-
 Program_StringOption*
 program_add_string_option(char* name, char* name_alt, char* value_default);
 
